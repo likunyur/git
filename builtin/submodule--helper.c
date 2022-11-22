@@ -1077,6 +1077,9 @@ static void submodule_summary_callback(struct diff_queue_struct *q,
 		if (!S_ISGITLINK(p->one->mode) && !S_ISGITLINK(p->two->mode))
 			continue;
 		temp = (struct module_cb*)malloc(sizeof(struct module_cb));
+		if (!temp)
+			 BUG("The module_cb structure object fails to be allocated and the program may terminate abnormally");
+
 		temp->mod_src = p->one->mode;
 		temp->mod_dst = p->two->mode;
 		temp->oid_src = p->one->oid;
